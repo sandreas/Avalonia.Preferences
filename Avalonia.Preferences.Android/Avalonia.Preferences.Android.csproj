@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0-android</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetPlatformVersion>21</TargetPlatformVersion>
+        <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <MSBuildEnableWorkloadResolver>true</MSBuildEnableWorkloadResolver>
+        <DebugType>portable</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Avalonia.Preferences\Avalonia.Preferences.csproj" />
+    </ItemGroup>
+    
+</Project>

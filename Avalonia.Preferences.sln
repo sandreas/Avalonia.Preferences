@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Preferences", "Avalonia.Preferences\Avalonia.Preferences.csproj", "{E1B47020-2ED6-4854-8A47-48A8A20BA57E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Preferences.Android", "Avalonia.Preferences.Android\Avalonia.Preferences.Android.csproj", "{AD77CE3B-2766-47D8-BFCC-C711CB82197C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{E1B47020-2ED6-4854-8A47-48A8A20BA57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1B47020-2ED6-4854-8A47-48A8A20BA57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1B47020-2ED6-4854-8A47-48A8A20BA57E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD77CE3B-2766-47D8-BFCC-C711CB82197C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD77CE3B-2766-47D8-BFCC-C711CB82197C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD77CE3B-2766-47D8-BFCC-C711CB82197C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD77CE3B-2766-47D8-BFCC-C711CB82197C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
