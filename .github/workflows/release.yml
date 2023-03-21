@@ -7,7 +7,7 @@ env:
   GITHUB_USER: 'sandreas'
   PROJECT_NAME: 'Avalonia.Preferences'
   PROJECT_PATH: 'Avalonia.Preferences/Avalonia.Preferences.csproj'
-  DOTNET_VERSION: '6.0.301'
+  DOTNET_VERSION: '6.0.401'
 jobs:
   build:
     runs-on: ubuntu-latest
