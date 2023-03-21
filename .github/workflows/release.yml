@@ -41,6 +41,6 @@ jobs:
 
       - name: Push
         run: |
-          dotnet nuget push ${{ env.PACKAGE_ID }}.${{ steps.version.outputs.version-without-v }}.nupkg --source https://nuget.pkg.github.com/${{ env.GITHUB_USER }}/index.json --api-key ${GITHUB_TOKEN} && dotnet nuget push ${{ env.PACKAGE_ID }}.${{ steps.version.outputs.version-without-v }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}           
+          dotnet nuget push ${{ env.PACKAGE_ID }}.${{ steps.version.outputs.version-without-v }}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}           
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
