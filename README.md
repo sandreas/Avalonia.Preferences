@@ -72,24 +72,24 @@ private async Task<int> GetCounterAsync() {
     if (preferences.ContainsKey("counter"))
     {
         // get value
-        counter = await _preferences.GetAsync("counter", 0);
+        counter = await _preferences.GetAsync("counter", 0, ct);
     }
     
     
     counter++;
     
     // set value and check for success
-    if(!_preferences.Set("counter", PrefTester)) {
+    if(!await _preferences.SetAsync("counter", PrefTester, ct)) {
         Console.WriteLine("Error: Could not set counter");
     }
     
     // remove value
-    if(!_preferences.Remove("counter")) {
+    if(!await _preferences.RemoveAsync("counter", ct)) {
         Console.WriteLine("Error: Could not remove counter");
     }
     
     // remove all values (clear)
-    var clearedItemsCount = _preferences.Clear();
+    var clearedItemsCount = await _preferences.ClearAsync(ct);
     if(clearedItemsCount == -1) {
         Console.WriteLine("Error: Could not clear preferences");
     } else {
