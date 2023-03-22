@@ -34,7 +34,7 @@ if (preferences.ContainsKey("counter"))
 counter++;
 
 // set value and check for success
-if(!_preferences.Set("counter", PrefTester)) {
+if(!_preferences.Set("counter", counter)) {
     Console.WriteLine("Error: Could not set counter");
 }
 
