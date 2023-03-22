@@ -14,7 +14,7 @@
             Cross platform user preferences for avalonia
         </Description>
         <RootNamespace>Avalonia.Preferences</RootNamespace>
-        <PackageReadmeFile>../README.md</PackageReadmeFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="/" />
