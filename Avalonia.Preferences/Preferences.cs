@@ -2,28 +2,36 @@ using Avalonia.Preferences.Storage;
 
 namespace Avalonia.Preferences;
 
-public class Preferences: IPreferences
+public class Preferences : IPreferences
 {
-    private static IPreferencesStorage? _storage;
+    public static IPreferencesStorage? PlatformStorage { get; set; }
+    private readonly IPreferencesStorage _storage;
 
-    public Preferences(IPreferencesStorage? fallbackStorage = null)
+    public Preferences(IPreferencesStorage? storage = null)
     {
-        _storage ??= fallbackStorage ?? new GenericPreferencesStorage();
-    }
-    
-    public static void Init(IPreferencesStorage preferences)
-    {
-        _storage = preferences;
+        _storage = PlatformStorage ?? storage ?? new GenericPreferencesStorage();
     }
 
-    public bool Set<T>(string key, T? value) => _storage?.Set(key, value) ?? false;
+
+    public bool Set<T>(string key, T? value) => _storage.Set(key, value);
 
 
-    public T? Get<T>(string key, T? defaultValue) => _storage == null ? default : _storage.Get(key, defaultValue);
+    public T? Get<T>(string key, T? defaultValue) => _storage.Get(key, defaultValue);
 
-    public bool Remove(string key) => _storage?.Remove(key) ?? false;
+    public bool Remove(string key) => _storage.Remove(key);
 
-    public int Clear() => _storage?.Clear() ?? -1;
+    public int Clear() => _storage.Clear();
 
-    public bool ContainsKey(string key) => _storage?.ContainsKey(key) ?? false;
+    public bool ContainsKey(string key) => _storage.ContainsKey(key);
+
+    public async Task<bool> SetAsync<T>(string key, T? value, CancellationToken? ct = null) =>
+        await _storage.SetAsync(key, value, ct);
+
+    public async Task<T?> GetAsync<T>(string key, T? defaultValue, CancellationToken? ct = null) =>
+        await _storage.GetAsync(key, defaultValue, ct);
+
+    public async Task<bool> RemoveAsync(string key, CancellationToken? ct = null) =>
+        await _storage.RemoveAsync(key, ct);
+
+    public async Task<int> ClearAsync(CancellationToken? ct = null) => await _storage.ClearAsync(ct);
 }

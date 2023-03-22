@@ -1,7 +1,7 @@
 using Avalonia.Preferences.Storage;
 
 namespace Avalonia.Preferences.Android.Storage;
-
+/*
 // https://github.com/jamesmontemagno/SettingsPlugin/blob/master/src/Plugin.Settings/Settings.android.cs
 public class AndroidPreferencesStorage : AbstractPreferencesStorage
 {
@@ -54,3 +54,4 @@ public class AndroidPreferencesStorage : AbstractPreferencesStorage
 
     public override bool ContainsKey(string key) => _sharedPreferences.Contains(key);
 }
+*/

@@ -9,11 +9,14 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <RepositoryUrl>https://github.com/sandreas/Avalonia.Preferences.git</RepositoryUrl>
         <PackageProjectUrl>https://github.com/sandreas/Avalonia.Preferences.git</PackageProjectUrl>
-        <PackageTags>avalonia</PackageTags>
+        <PackageTags>avalonia;preferences;settings;user settings</PackageTags>
         <Description>
             Cross platform user preferences for avalonia
         </Description>
         <RootNamespace>Avalonia.Preferences</RootNamespace>
+        <PackageReadmeFile>../README.md</PackageReadmeFile>
     </PropertyGroup>
-
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
 </Project>
