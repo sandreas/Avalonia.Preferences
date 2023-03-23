@@ -1,4 +1,5 @@
 using System.IO.IsolatedStorage;
+using System.Text.Json;
 
 namespace Avalonia.Preferences.Storage;
 
@@ -10,13 +11,9 @@ public class GenericPreferencesStorage : AbstractPreferencesStorage
 
     public override bool ContainsKey(string key) => Store.FileExists(key);
 
-    public override Stream OpenReadStream(string key) => Store.OpenFile(key, FileMode.Open);
-
-    public override Stream OpenWriteStream(string key) => Store.OpenFile(key, FileMode.Create, FileAccess.Write);
-
     public override async Task<bool> RemoveAsync(string key, CancellationToken? ct = null)
     {
-        await Sema.WaitAsync();
+        await Sema.WaitAsync(ct ?? CancellationToken.None);
         try
         {
             if (!ContainsKey(key) || HasTokenBeenCancelled(ct)) return false;
@@ -31,7 +28,7 @@ public class GenericPreferencesStorage : AbstractPreferencesStorage
 
     public override async Task<int> ClearAsync(CancellationToken? ct = null)
     {
-        await Sema.WaitAsync();
+        await Sema.WaitAsync(ct ?? CancellationToken.None);
         try
         {
             var fileNames = Store.GetFileNames();
@@ -56,5 +53,44 @@ public class GenericPreferencesStorage : AbstractPreferencesStorage
         }
     }
     
+    public override async Task<bool> TryPersistAsync<T>(string key, T value, CancellationToken ct)
+    {
+        await Sema.WaitAsync(ct);
+        try
+        {
+            await using var stream = Store.OpenFile(key, FileMode.Create, FileAccess.Write);
+            await JsonSerializer.SerializeAsync(stream, value, (JsonSerializerOptions?)null, ct);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+        finally
+        {
+            Sema.Release();
+        }
+    }
+
+    public override async Task<T?> LoadAsync<T>(string key, CancellationToken ct) where T: default
+    {
+        await Sema.WaitAsync(ct);
+
+        // it may happen, that a value type changes and can't be deserialized
+        // so prevent exceptions in this case
+        try
+        {
+            await using var stream = Store.OpenFile(key, FileMode.Open);
+            return await JsonSerializer.DeserializeAsync<T>(stream, (JsonSerializerOptions?)null, ct);
+        }
+        catch (Exception)
+        {
+            return default;
+        }
+        finally
+        {
+            Sema.Release();
+        }
+    }
     
 }

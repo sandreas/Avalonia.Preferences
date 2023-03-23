@@ -26,7 +26,7 @@ var counter = 0;
 // check for key
 if (preferences.ContainsKey("counter"))
 {
-    // get value
+    // get value with defaultValue fallback
     counter = _preferences.Get("counter", 0);
 }
 
@@ -57,12 +57,14 @@ if(clearedItemsCount == -1) {
 ### API sample (async, xplat)
 
 #### Platform specific storage
+If you need platform specific storage (e.g. for iOS or Android), you have to implement your own `IPreferences` implementation and statically set it before instantiating `Preferences`.
+To simplify the implementation, you can extend `AbstractPreferencesStorage` already providing some helpful overridable methods. As an example take a look at `GenericPreferencesStorage` 
 ```c#
-    // your platform specific IPreferencesStorage implementation must be added statically before instantiation
     // e.g. YourProject.Android/SplashActivity.cs
     protected override void OnResume()
     {
         base.OnResume();
+        // your platform specific IPreferences implementation must be added statically before instantiation
         Preferences.PlatformStorage = new AndroidPlatformStorage(Application.Context);
         StartActivity(new Intent(Application.Context, typeof(MainActivity)));
     }
@@ -80,7 +82,7 @@ private async Task<int> GetCounterAsync() {
     // check for key
     if (_preferences.ContainsKey("counter"))
     {
-        // get value
+        // get value with defaultValue fallback
         counter = await _preferences.GetAsync("counter", 0, ct);
     }
 

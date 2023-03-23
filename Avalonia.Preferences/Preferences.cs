@@ -4,10 +4,10 @@ namespace Avalonia.Preferences;
 
 public class Preferences : IPreferences
 {
-    public static IPreferencesStorage? PlatformStorage { get; set; }
-    private readonly IPreferencesStorage _storage;
+    public static IPreferences? PlatformStorage { get; set; }
+    private readonly IPreferences _storage;
 
-    public Preferences(IPreferencesStorage? storage = null)
+    public Preferences(IPreferences? storage = null)
     {
         _storage = PlatformStorage ?? storage ?? new GenericPreferencesStorage();
     }
