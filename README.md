@@ -1,6 +1,10 @@
 # Avalonia.Preferences
 Cross platform preferences library for AvaloniaUI
 
+IMPORTANT: There is a newer library with a sligthtly different API, that also supports WASM and is generally better in terms of compatibility to official libraries. I'd recommend to no longer use THIS respository / library (`Avalonia.Preferences`) and instead use the new one instead:
+
+https://github.com/sandreas/Avalonia.SimplePreferences
+
 
 ## Usage
 
